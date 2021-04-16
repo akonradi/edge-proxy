@@ -66,9 +66,10 @@ def proxy_dependencies():
     go_repository(
         name = "com_github_envoyproxy_protoc_gen_validate",
         build_file_proto_mode = "disable_global",
-        importpath = "github.com/envoyproxy/protoc-gen-validate",
-        sum = "h1:EQciDnbrYxy13PgWoY8AqoxGiPrpgBZ1R8UNe3ddc+A=",
-        version = "v0.1.0",
+        remote = "/usr/local/google/home/akonradi/git/protoc-gen-validate",
+        vcs = "git",
+        importpath = "github.com/akonradi/protoc-gen-validate",
+        commit = "0fdb033363a119d9116052b617aad142187a3901",
     )
     go_repository(
         name = "com_github_golang_glog",
