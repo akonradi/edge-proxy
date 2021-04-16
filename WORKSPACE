@@ -47,17 +47,24 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
 # -----------------------------------------------------------------------------
+# Python Toolchain (for Devcontainer)
+# -----------------------------------------------------------------------------
+http_archive(
+    name = "rules_python",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.2.0/rules_python-0.2.0.tar.gz",
+)
+
+# -----------------------------------------------------------------------------
 # Golang and gRPC tools and external dependencies
 # -----------------------------------------------------------------------------
 
 # Fetch Protobuf dependencies
 http_archive(
     name = "rules_proto",
-    sha256 = "602e7161d9195e50246177e7c55b2f39950a9cf7366f74ed5f22fd45750cd208",
-    strip_prefix = "rules_proto-97d8af4dc474595af3900dd85cb3a29ad28cc313",
+    strip_prefix = "rules_proto-6103a187ba73feab10b5c44b52fa093675807d34",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/97d8af4dc474595af3900dd85cb3a29ad28cc313.tar.gz",
-        "https://github.com/bazelbuild/rules_proto/archive/97d8af4dc474595af3900dd85cb3a29ad28cc313.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/6103a187ba73feab10b5c44b52fa093675807d34.tar.gz",
+        "https://github.com/bazelbuild/rules_proto/archive/6103a187ba73feab10b5c44b52fa093675807d34.tar.gz",
     ],
 )
 
@@ -201,15 +208,6 @@ container_pull(
     registry = "gcr.io",
     repository = "distroless/base-debian10",
 )
-
-# -----------------------------------------------------------------------------
-# Python Toolchain (for Devcontainer)
-# -----------------------------------------------------------------------------
-# http_archive(
-#     name = "rules_python",
-#     sha256 = "e46612e9bb0dae8745de6a0643be69e8665a03f63163ac6610c210e80d14c3e4",
-#     url = "https://github.com/bazelbuild/rules_python/releases/download/0.0.3/rules_python-0.0.3.tar.gz",
-# )
 
 # # This call should always be present.
 # load("@rules_python//python:repositories.bzl", "py_repositories")
