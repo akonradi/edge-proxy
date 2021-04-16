@@ -6,21 +6,8 @@ This repository contains a reference implementation of [Envoy's Exth Authz serve
 
 There are currently a couple of issues on this repo which are being worked on...
 
-issue 1 - bazel gazelle breaking the WORKSPACE (see [Issue 1](#issue-1))
-issue 2 - building go_binary will result in multiple copies of package passed to linker (see [debug.log](debug.log))
-
-### Issue 1
-
-When running `make update_repos`, this will update the go modules, however, it will also produce a 4-line entry on the WORKSPACE that **MUST** be removed before continuing to run bazel commands. The lines to remove are these and are inserted on lines 136-139:
-
-```bazel
-load("//:./bazel/private/repositories.bzl", "proxy_dependencies")
-
-# gazelle:repository_macro ./bazel/private/repositories.bzl%proxy_dependencies
-proxy_dependencies()
-```
-
-I have not yet been able to figure out why this is happening, but the solution is known.
+- issue 1: bazel gazelle breaking the WORKSPACE (see [Issue 1](#issue-1))
+- issue 2: building go_binary will result in multiple copies of package passed to linker (see [debug.log](debug.log))
 
 ---
 
@@ -49,3 +36,32 @@ Start by creating a `devcontainer.json` file inside your local `.devcontainer` d
 This repo includes a Makefile which includes all the targets required for both Development as well as building and releasing the Edge Proxy.
 
 **You SHOULD use `make` to perform most of the tasks required**
+
+## Issues
+
+### Issue 1
+
+When running `make update_repos`, this will update the go modules, however, it will also produce a 4-line entry on the WORKSPACE that **MUST** be removed before continuing to run bazel commands. The lines to remove are these and are inserted on lines 136-139:
+
+```bazel
+load("//:./bazel/private/repositories.bzl", "proxy_dependencies")
+
+# gazelle:repository_macro ./bazel/private/repositories.bzl%proxy_dependencies
+proxy_dependencies()
+```
+
+I have not yet been able to figure out why this is happening, but the solution is known.
+
+### Issue 2
+
+Attempting to build a `go_binary` will result in
+
+```sh
+link: package conflict error: github.com/golang/protobuf/ptypes/any: multiple copies of package passed to linker:
+        @com_github_golang_protobuf//ptypes/any:any
+        @io_bazel_rules_go//proto/wkt:any_go_proto
+Set "importmap" to different paths or use 'bazel cquery' to ensure only one
+package with this path is linked.
+```
+
+Running `bazel cquery` has pointed this to be an issue with either `envoyproxy/protoc-gen-validate` or `envoyproxy/go-control-plane`. The [debug.log](debug.log) has more details into this issue
