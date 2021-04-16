@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+# -----------------------------------------------------------------------------
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "auth.go",
+    ],
+    importpath = "github.com/celsosantos/edge-proxy/pkg/domains/clientcompany/auth/v3",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/v3:go_default_library",
+        "//pkg/domains/clientcompany/claims:go_default_library",
+        "@com_github_envoyproxy_go_control_plane//envoy/service/auth/v3:go_default_library",
+    ],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)

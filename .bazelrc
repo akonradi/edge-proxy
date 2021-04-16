@@ -1,0 +1,4 @@
+# Project-specific Bazel options.
+
+build --incompatible_use_python_toolchains=false
+run --incompatible_use_python_toolchains=false

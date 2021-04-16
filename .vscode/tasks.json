@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // Configuratio to allow debugging and stepping through the ClientCompany Proxy code
+      "label": "debug-v2",
+      "type": "shell",
+      "command": "bazel build -c dbg //cmd/auth_server_v2:authz_service",
+      "problemMatcher": [
+        "$go"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      // Configuratio to allow debugging and stepping through the ClientCompany Proxy code
+      "label": "debug-v3",
+      "type": "shell",
+      "command": "bazel build -c dbg //cmd/auth_server_v3:authz_service",
+      "problemMatcher": [
+        "$go"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

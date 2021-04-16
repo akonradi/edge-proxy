@@ -1,0 +1,13 @@
+#!/bin/sh
+# Copy into the .git directory if required
+
+# Find GIT 
+GIT_ROOT=$(git rev-parse --show-toplevel 2> /dev/null) \
+    && echo " ${_G}✓ ${_Y}Git:${_G} GIT Root found ${_0} → $GIT_ROOT" \
+    || {
+        echo " ${_R}✗ ${_Y}Git:${_R} No GIT Root found${_0}"
+        exit 1
+    }
+
+# Clean YAML files
+find ${GIT_ROOT}/deploy/**/data/ -type f -name \*.yaml -exec yq eval 'del(.metadata.resourceVersion)' -i {} ';' -exec yq eval 'del(.status)' -i {} ';'

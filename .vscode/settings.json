@@ -1,0 +1,59 @@
+{
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnSaveMode": "file",
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll": false
+    }
+  },
+  "go.inferGopath": false,
+  "go.useLanguageServer": true,
+  "go.buildOnSave": "off",
+  "go.lintTool": "golint",
+  "go.lintOnSave": "file",
+  "go.formatTool": "goimports",
+  "go.formatFlags": [
+    "-tabwidth=2",
+    "-tabs=false"
+  ],
+  "go.liveErrors": {
+    "enabled": true,
+    "delay": 500
+  },
+  "go.delveConfig": {
+    "dlvLoadConfig": {
+      "followPointers": true,
+      "maxVariableRecurse": 1,
+      "maxStringLen": 64,
+      "maxArrayValues": 64,
+      "maxStructFields": -1
+    },
+    "apiVersion": 2,
+    "showGlobalVariables": true
+  },
+  "editor.tabSize": 2,
+  "markdown.extension.print.theme": "dark",
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#1f6fd0",
+    "activityBar.activeBorder": "#ee90bb",
+    "activityBar.background": "#1f6fd0",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ee90bb",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#1857a4",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#1f6fd0",
+    "titleBar.activeBackground": "#1857a4",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#1857a499",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.remoteColor": "#1857a4",
+  "peacock.color": "#1857a4",
+  "files.insertFinalNewline": true
+}

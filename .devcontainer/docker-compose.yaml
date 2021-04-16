@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  dev-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # args:
+      #   - ARG_BAZEL_VERSION=3.7.2
+    ports:
+      - '9001:9001'
+    environment:
+      - KEY_HERE=$KEY_HERE
+    volumes:
+      - '..:/workspace:cached'
+      - '${HOME}/.ssh:/root/.ssh-localhost:ro'
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - 'seccomp:unconfined'
+    command: '/bin/sh -c "while sleep 1000; do :; done"'
+    networks:
+      - bazel
+networks:
+  bazel:
+    driver: bridge

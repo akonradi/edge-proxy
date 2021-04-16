@@ -1,0 +1,40 @@
+{
+  "name": "Edge Proxies Devcontainer",
+  "dockerComposeFile": [
+    "./docker-compose.yaml",
+  ],
+  "service": "dev-container",
+  "workspaceFolder": "/workspace",
+  "runServices": [
+    "dev-container",
+  ],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [],
+  // Copy the contents to the correct location and set permissions
+  "postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
+  // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+  // "remoteUser": "vscode"
+  // Indicates whether VS Code should stop the containers when the VS Code window is closed / shut down.
+  // Values are none and stopCompose (default).
+  "shutdownAction": "stopCompose",
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "go.gopath": "/go",
+    "bazel.executable": "/usr/bin/bazel",
+    "bazel.buildifierExecutable": "/go/bin/buildifier",
+    "bazel.buildifierFixOnFormat": true,
+    "bazel.enableCodeLens": true
+  },
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "golang.go",
+    "bazelbuild.vscode-bazel",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "zxh404.vscode-proto3",
+    "mauve.terraform",
+    "humao.rest-client",
+    "ms-azuretools.vscode-docker",
+  ],
+}
